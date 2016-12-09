@@ -189,4 +189,79 @@
     }
 }
 
+- (void)setFont:(UIFont *)font
+{
+    _font = font;
+    _linkFont = font;
+    
+    // 设置属性字体
+    [self.attributeString setFont:font];
+    // 刷新
+    [self setNeedsDisplay];
+}
+
+- (void)setTextColor:(UIColor *)textColor
+{
+    _textColor = textColor;
+    _linkColor = textColor;
+    
+    // 设置颜色
+    [self.attributeString setTextColor:textColor];
+    // 刷新
+    [self setNeedsDisplay];
+}
+
+- (void)setLinkFont:(UIFont *)linkFont
+{
+    _linkFont = linkFont;
+    
+    // 设置超文本字体
+    [self.attributeString setFont:linkFont links:self.linkArr];
+}
+
+- (void)setLinkColor:(UIColor *)linkColor
+{
+    _linkColor = linkColor;
+    
+    // 设置超文本颜色
+    [self.attributeString setTextColor:linkColor links:self.linkArr];
+}
+
+/**
+ * 重写frameRef的setter方法
+ * 此处需要我们手动管理内存
+ */
+- (void)setFrameRef:(CTFrameRef)frameRef
+{
+    if (_frameRef != frameRef) {
+        if (_frameRef != nil) {
+            CFRelease(_frameRef);
+        }
+        CFRetain(frameRef);
+        _frameRef = frameRef;
+    }
+}
+
+-(void)setImageSize:(CGSize)imageSize{
+    if (!CGSizeEqualToSize(_imageSize, imageSize)) {
+        if (self.imageArr.count > 0) {
+            for (QGLabelImage *labelImage in self.imageArr) {
+                labelImage.imageSize = imageSize;
+            }
+        }
+    }
+}
+
+/**
+ * 手动释放_frameRef内存
+ */
+- (void)dealloc
+{
+    if (_frameRef != nil) {
+        CFRelease(_frameRef);
+        _frameRef = nil;
+    }
+}
+
+
 @end

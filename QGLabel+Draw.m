@@ -46,20 +46,19 @@ static CGFloat kRadius = 2.f;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(ctx, self.hightLightColor.CGColor);
     //上
-    CGContextMoveToPoint(ctx, pointX, pointY);
-    CGContextAddLineToPoint(ctx, pointX-kRadius, pointY);
+    CGContextMoveToPoint(ctx, pointX + kRadius, pointY);
+    CGContextAddLineToPoint(ctx, pointX-kRadius +width, pointY);
     CGContextAddArc(ctx, pointX +width - kRadius, pointY + kRadius, kRadius, -0.5*M_PI, 0.0, 0);
     //右
     CGContextAddLineToPoint(ctx, pointX + width, pointY + height - kRadius);
     CGContextAddArc(ctx, pointX + width -kRadius, pointY + height - kRadius, kRadius, -0.5*M_PI, 0.0, 0);
     //下
-    CGContextAddLineToPoint(ctx, pointX+kRadius, pointY + height);
-    CGContextAddArc(ctx, pointX + kRadius, pointY + height - kRadius, kRadius, -0.5*M_PI, 0.0, 0);
+    CGContextAddLineToPoint(ctx, pointX + kRadius, pointY + height);
+    CGContextAddArc(ctx, pointX + kRadius, pointY + height - kRadius, kRadius, 0.5*M_PI, M_PI, 0);
     
     //左
-    CGContextAddLineToPoint(ctx, pointX, pointY-kRadius);
-    CGContextAddArc(ctx, pointX + kRadius, kRadius, kRadius, -0.5*M_PI, 0.0, 0);
-    
+    CGContextAddLineToPoint(ctx, pointX, pointY + kRadius);
+    CGContextAddArc(ctx, pointX + kRadius, pointY + kRadius, kRadius, M_PI, 1.5*M_PI, 0);
     CGContextFillPath(ctx);
     
 }
