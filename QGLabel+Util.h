@@ -15,9 +15,9 @@
 
 @property (nonatomic ,assign,readonly )CTFrameRef frameRef;
 //存放linkArr的数组
-@property (nonatomic ,assign ,readonly )NSMutableArray *linkArr;
+@property (nonatomic ,strong ,readonly )NSMutableArray *linkArr;
 //存放图片模型的数组
-@property (nonatomic, assign,readonly  )NSMutableArray *imageDatas;
+@property (nonatomic, strong,readonly  )NSMutableArray *imageArr;
 
 
 //公共方法, 检测当前点击的位置 是否在链接 的位置上 ,如果是的话 返回一个link对象如果点击的不在上面就返回一个nil

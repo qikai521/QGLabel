@@ -46,7 +46,7 @@ static CGFloat kRadius = 2.f;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(ctx, self.hightLightColor.CGColor);
     //上
-    CGContextMoveToPoint(ctx, pointX+kRadius, pointY);
+    CGContextMoveToPoint(ctx, pointX, pointY);
     CGContextAddLineToPoint(ctx, pointX-kRadius, pointY);
     CGContextAddArc(ctx, pointX +width - kRadius, pointY + kRadius, kRadius, -0.5*M_PI, 0.0, 0);
     //右

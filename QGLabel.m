@@ -11,6 +11,7 @@
 #import "NSMutableAttributedString+Frame.h"
 #import "NSMutableAttributedString+Image.h"
 #import "NSMutableAttributedString+Attribute.h"
+#import "QGLabel+Util.h"
 #import "QGLabel+Draw.h"
 
 @interface QGLabel ()
@@ -113,11 +114,79 @@
     [self drawHighLightColor];
     [self frameLineDraw];
     [self drawImages];
-
+    
 }
 
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    CGPoint point = [[touches.allObjects lastObject] locationInView:self];
+    QGLabelLink *link = [self touchLinkInPosition:point];
+    if (link) {
+        self.selectedLink = link;
+        [self setNeedsDisplay];
+        return;
+    }
     
+    QGLabelImage *image = [self touchImageInPosition:point];
+    if (image) {
+        self.selectedImage = image;
+    }
+    
+}
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    // 0.获取手指点中的坐标
+    CGPoint position = [[touches anyObject] locationInView:self];
+    
+    // 1.判断开始触碰的时候是否选中超文本
+    if (self.selectedLink) {
+        // 1.1获取当前手指选中的超文本
+        QGLabelLink *selectedLink = [self touchLinkInPosition:position];
+        // 1.2如果当前选中的超文本和触碰开始时选中的超文本不一致
+        // -> 取消当前选中
+        if (selectedLink != self.selectedLink) {
+            // 1.2.1取消当前选中
+            self.selectedLink = nil;
+            // 1.2.2刷新
+            [self setNeedsDisplay];
+        }
+    }
+    
+    // 2.判断开始触碰的时候是否选图片
+    if (self.selectedImage) {
+        // 1.1获取当前手指选中的图片
+        QGLabelImage *selectedImage = [self touchImageInPosition:position];
+        // 1.2.如果当前选中的图片和触碰开始时选中的图片不一致
+        // -> 取消当前选中
+        if (selectedImage != self.selectedImage) {
+            // 4.1取消当前选中
+            self.selectedImage = nil;
+        }
+    }
+}
+
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (touches.allObjects.count == 1) {
+        //判断当前只有一个手指的时候
+        if (self.selectedLink) {
+            if (self.delegate) {
+                [self.delegate attributedLabel:self selectedLink:self.selectedLink];
+            }
+            self.selectedLink = nil;
+            [self setNeedsDisplay];
+        }
+        
+        if (self.selectedImage) {
+            if (self.delegate) {
+                [self.delegate attributedLabel:self selectedImage:self.selectedImage];
+            }
+            self.selectedImage = nil;
+            [self setNeedsDisplay];
+        }
+        
+    }
 }
 
 @end

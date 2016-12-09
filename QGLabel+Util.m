@@ -14,9 +14,9 @@
 @implementation QGLabel (Util)
 @dynamic frameRef;
 @dynamic linkArr;
-@dynamic imageDatas;
+@dynamic imageArr;
 
-- (QGLabelLink *)touchLinkWithPosition:(CGPoint)position
+- (QGLabelLink *)touchLinkInPosition:(CGPoint)position
 {
     if (!self.linkArr || !self.linkArr.count) return nil;
     CFIndex index = [self touchPosition:position];
@@ -33,7 +33,7 @@
     // 3.判断index在哪个图片上
     // 3.1准备谓词查询语句
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"position == %@", @(index)];
-    NSArray *resultArr = [self.imageDatas filteredArrayUsingPredicate:predicate];
+    NSArray *resultArr = [self.imageArr filteredArrayUsingPredicate:predicate];
     // 3.2获取符合条件的对象
     QGLabelImage *imageData = [resultArr firstObject];
     return imageData;
@@ -85,5 +85,7 @@
     }
     return link;
 }
+
+
 
 @end

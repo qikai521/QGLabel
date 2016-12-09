@@ -103,9 +103,15 @@ static CGFloat widthCallback(void *ref)
     CTFontRef fontRef = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, NULL);
     for (QGLabelImage *qgImage in imageDatas) {
         NSString *imageName = qgImage.imageName;
+        if (![UIImage imageNamed:imageName]) {
+            // 4.1.2移除数据
+            [imageDatas removeObject:qgImage];
+            // 4.1.3退出循环
+            continue;
+        }
         if (CGSizeEqualToSize(imageSize, CGSizeZero)) {
             //如果传入的size为0 的时候 默认图片的大小为字体的大小
-            qgImage.imageSize = CGSizeMake(font.pointSize*1.2, font.pointSize*1.2);
+            qgImage.imageSize = CGSizeMake(font.pointSize, font.pointSize);
         }else{
             qgImage.imageSize = imageSize;
         }

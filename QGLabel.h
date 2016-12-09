@@ -22,7 +22,7 @@
  * 选中图片的回调
  * -> 被选中的图片selectedImage
  */
-- (void)attributedLabel:(QGLabel *)label selectedImage:(QGLabel *)selectedImage;
+- (void)attributedLabel:(QGLabel *)label selectedImage:(QGLabelImage *)selectedImage;
 
 @end
 
