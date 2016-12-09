@@ -99,7 +99,7 @@
     //查找是否linkArr中已经有了text=link的对象
     NSArray *resultArr = [self.linkArr filteredArrayUsingPredicate:predicate];
     if (resultArr.count) return;
-    NSArray *linkArr = [self.attributeString setLinkWithLinkColor:self.linkColor linkFont:self.linkFont];
+    NSArray *linkArr = [self.attributeString setCustomLink:link linkColor:self.linkColor linkFont:self.linkFont];
     [self.linkArr addObjectsFromArray:linkArr];
     [self setNeedsDisplay];
 }

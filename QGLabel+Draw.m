@@ -51,7 +51,7 @@ static CGFloat kRadius = 2.f;
     CGContextAddArc(ctx, pointX +width - kRadius, pointY + kRadius, kRadius, -0.5*M_PI, 0.0, 0);
     //右
     CGContextAddLineToPoint(ctx, pointX + width, pointY + height - kRadius);
-    CGContextAddArc(ctx, pointX + width -kRadius, pointY + height - kRadius, kRadius, -0.5*M_PI, 0.0, 0);
+    CGContextAddArc(ctx, pointX + width - kRadius, pointY + height - kRadius, kRadius, 0.0, 0.5*M_PI, 0);
     //下
     CGContextAddLineToPoint(ctx, pointX + kRadius, pointY + height);
     CGContextAddArc(ctx, pointX + kRadius, pointY + height - kRadius, kRadius, 0.5*M_PI, M_PI, 0);
