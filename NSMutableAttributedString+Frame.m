@@ -80,7 +80,7 @@ CGRect CTRunGetTypeGraphicBoundsForRunRect(CTRunRef runRef,CTLineRef lineRef ,CG
 
 
 CGRect CTRunGetTypographicBoundsForImageRect(CTRunRef runRef, CTLineRef lineRef, CGPoint lineOrigin, QGLabelImage *imageData){
-    // 获取对应runRef的rect
+    // 获取对应runRef的rectr
     CGRect rect = CTRunGetTypeGraphicBoundsForRunRect(runRef, lineRef, lineOrigin);
     return UIEdgeInsetsInsetRect(rect, imageData.imageInsets);
 }

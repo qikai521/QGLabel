@@ -105,7 +105,7 @@
 
 -(void)drawRect:(CGRect)rect{
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformMakeScale(0, rect.size.height), 1.0f, -1);
+    CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformMakeTranslation(0, rect.size.height), 1.0f, -1);
     CGContextConcatCTM(context, transform);
     
     self.frameRef = [self.attributeString prepareFrameRefWithRect:rect];

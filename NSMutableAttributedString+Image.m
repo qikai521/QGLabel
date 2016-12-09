@@ -13,7 +13,6 @@
  * 图片与文字上下左右的间距
  */
 #define imageInset UIEdgeInsetsMake(0.f, 1.f, 0.f, 1.f)
-#define  kZhanWeiString @" "
 /**
  * [/图片名] 的正则表达式
  */
