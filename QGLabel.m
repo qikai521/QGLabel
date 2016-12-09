@@ -56,6 +56,7 @@
 }
 
 -(void)initProperty{
+    self.userInteractionEnabled = YES;
     self.backgroundColor = [UIColor grayColor];
     // 设置字体大小
     self.font = [UIFont systemFontOfSize:16];
@@ -110,8 +111,12 @@
     
     self.frameRef = [self.attributeString prepareFrameRefWithRect:rect];
     [self drawHighLightColor];
-    [self drawImages];
     [self frameLineDraw];
+    [self drawImages];
+
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
 }
 

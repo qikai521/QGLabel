@@ -38,8 +38,8 @@ static CGFloat ascentCallback(void *ref)
     CGFloat ascent = CTFontGetAscent(imageData.fontRef);
     CGFloat desenct  =CTFontGetAscent(imageData.fontRef);
     
-    CGFloat baseHeight = (ascent - desenct)/2.0f;
-    return baseHeight + imageHeiht/2.0;
+    CGFloat baseHeight = (ascent + desenct)/2.0f - desenct;
+    return baseHeight + imageHeiht/2.0f;
 }
 
 static CGFloat descentCallBack(void *ref){

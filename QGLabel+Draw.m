@@ -9,6 +9,7 @@
 #import "QGLabel+Draw.h"
 #import "NSMutableAttributedString+Frame.h"
 #import "UIImageView+Gif.h"
+#import "UIView+frameAdjust.h"
 static CGFloat kRadius = 2.f;
 
 @implementation QGLabel (Draw)
@@ -91,6 +92,9 @@ static CGFloat kRadius = 2.f;
             CGRect imageFrame = CTRunGetTypographicBoundsForImageRect(run, lineRef, origin, imageData);
             if (imageData.imageType == QGImageType_GIF) {
                 UIImageView *imageView = [UIImageView imageViewWithGIFName:imageData.imageName frame:imageFrame];
+                imageView.backgroundColor = [UIColor orangeColor];
+                //因为当前坐标系是翻转的状态 所以需要翻转过来
+                imageView.y = self.height - imageView.height - imageView.frame.origin.y;
                 [self addSubview:imageView];
             }else{
                 UIImage *image = [UIImage imageNamed:imageData.imageName];
