@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "QGLabel.h"
 
-@interface ViewController ()
+@interface ViewController ()<QGLabelDelegate>
 
 @property (nonatomic ,strong )QGLabel *showLabel;
 
@@ -25,9 +25,17 @@
     _showLabel.imageSize = CGSizeMake(40, 40);
     _showLabel.hightLightColor = [UIColor yellowColor];
     [_showLabel addCustomLink:@"并且"];
+    _showLabel.delegate = self;
     [self.view addSubview:_showLabel];
     
     
+}
+
+-(void)attributedLabel:(QGLabel *)label selectedLink:(QGLabelLink *)selectedLink{
+    NSLog(@"lineText = %@",selectedLink.text);
+}
+-(void)attributedLabel:(QGLabel *)label selectedImage:(QGLabelImage *)selectedImage{
+    NSLog(@"lineImage = %@",selectedImage.imageName);
 }
 
 
